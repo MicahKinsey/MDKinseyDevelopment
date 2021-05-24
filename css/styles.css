@@ -1,0 +1,293 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-sizing: border-box;
+}
+body {
+    width: 100%;
+    height: auto;
+    overflow-x: hidden;
+}
+
+
+#landing {
+    background-position: 50% 75%;
+    background-size: cover;
+}
+#about {
+    background-color: black;
+    color: white;
+}
+#portfolio {
+    background-color: black;
+    color: white;
+}
+#contact {
+    background-color: black;
+    color: white;
+}
+
+.fullScreen {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+}
+
+
+/*PARALLAX SHIT*/
+.parallax {
+    width: 100vw;
+    height: 100vh;
+}
+
+#sky {
+    background-image: url(../img/stars-2179083.jpg);
+    background-size: cover;
+    position: absolute;
+    top: -100;
+    transform: rotateZ(
+        -10deg
+        )
+        scale(1.3);
+    z-index: -5;
+}
+
+#moon {
+    background-image: url(../img/parallax_01/bg_moon_png.png);
+    background-size: cover;
+    z-index: -4;
+    position: absolute;
+
+}
+
+#midground {
+    background-image: url(../img/parallax_01/mg_mountain_png.png);
+    background-size: cover;
+    z-index: -3;
+    position: absolute;
+    top: 0;
+
+}
+
+#foreground {
+    background-image: url(../img/parallax_01/fg_mountain_png_fullblack.png);
+    background-size: cover;
+    z-index: -2;
+    position: absolute;
+    top: -20;
+    height: 120vh;
+}
+
+header {
+    text-align: center;
+}
+header > h2 {
+    color: rgb(110, 233, 255);
+    font-size: 5.5vh;
+}
+
+.sidebar {
+    position: fixed;
+    right: 0;
+    height: 100%;
+    width: auto;
+    max-width: 50px;
+    text-align: center;
+
+}
+
+.sidebar > a {
+    color: rgb(110, 233, 255);
+    font-size: 4vh;
+    font-weight: bold;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    writing-mode: vertical-rl;
+    transform: rotate(
+        180deg
+        );
+    margin-bottom: 4vh;
+    text-decoration: none;
+    cursor: pointer;
+    vertical-align: text-top;
+}
+
+.sidebar > a.active {
+    text-decoration: underline;
+    font-size: 4.5vh;
+}
+
+.sidebar > a:hover {
+    animation-name: textshimmer;
+    animation-duration: 0.3s;
+    animation-direction: alternate;
+    animation-iteration-count: 2;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 10%;
+}
+
+.slider{
+    background-image: linear-gradient(to bottom right, rgb(255, 117, 37), rgb(255, 68, 21));
+    box-shadow: 0px 5px 20px 5px rgb(255, 51, 0);
+    padding: 8px;
+    width: 100%;
+}
+
+.slider-title {
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.slider-content {
+    width: 100%;
+    height: auto;
+    position: relative;
+    
+}
+
+.slider-top {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.slider-image-holder {
+    position: relative;
+    background-color: rgb(255, 255, 255);
+}
+
+.slider-image {
+    display: inline;
+    width: 100%;
+}
+
+.slider-arrow-left{
+    position: absolute;
+    top: calc(50% - 25px);
+    left: 20px;
+}
+
+
+.slider-arrow-right {
+    position: absolute;
+    top: calc(50% - 25px);
+    right: 20px;
+}
+
+.slider-circle-holder {
+    text-align: center;
+    position: absolute;
+    left: 45%;
+    bottom: 15px;
+}
+
+.slider-bottom {
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    padding: 2%;
+    margin-top: 8px;
+}
+
+#slider-image {
+    transition: opacity 0.2s;
+    opacity: 1;
+}
+
+.card {
+    display: flex;
+    background-image: linear-gradient(to bottom right, rgb(49, 240, 253), rgb(9, 180, 192));
+    box-shadow: 0px 5px 20px 5px rgb(0, 202, 216);
+    padding: 8px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+
+.card > .card-head {
+    flex: 100%;
+    text-align: center;
+    color: white;
+    padding: 3%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.card > .card-head > h2 {
+    font-size: 3.5vh;
+}
+
+.card > .card-head > h3 {
+    font-size: 2.75vh;
+}
+
+.card > .card-body {
+    flex: 100%;
+    text-align: center;
+    color: white;
+    padding: 3%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (min-width: 1200px) {
+
+    /*CARDS*/
+    .card {
+        flex-wrap: nowrap;
+    }
+
+    .card > .card-head {
+        flex: 45%;
+        text-align: center;
+        color: white;
+        padding: 3%;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .card > .card-body {
+        flex: 55%;
+        text-align: center;
+        color: white;
+        padding: 3%;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    /*SLIDER*/
+    .slider-top {
+        display: inline-block;
+        width: 66%;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .slider-bottom {
+        display: inline-block;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.2);
+        width: 34%;
+        height: 100%;
+        margin-top: 0;
+        padding: 2%;
+        top: 0;
+        right: 0;
+    }
+}
+
+/*ANIMATIONS*/
+
+@keyframes textshimmer {
+    from {color: rgb(110, 233, 255);}
+    to {color:white;}
+}
+
+
+/*Hide scrollbar for all devices*/
+body::-webkit-scrollbar {
+    display: none;
+}
+body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

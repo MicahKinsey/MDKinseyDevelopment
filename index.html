@@ -1,0 +1,247 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/styles.css">
+        
+    </head>
+    <body onscroll="scrollCheck()">
+        <!--<video id="smoke-transition" src="img/page_transition_smoke.mp4" autoplay muted on onplay="speedUp('smoke-transition')" onended="disappear('smoke-transition')"></video>-->
+        <div id="landing" class="fullScreen">
+            <div id="sky" class="parallax">
+
+            </div>
+            <div id="moon" class="parallax">
+
+            </div>
+            <div id="midground" class="parallax">
+
+            </div>
+            <div id="foreground" class="parallax">
+
+            </div>
+            <header>
+                <h2>MDKinsey Development</h2>
+            </header>
+            <div class="sidebar">
+                <a id="landing-link" onclick="scrollToElement('landing')" class="landing-nav active">HOME</a>
+                <a id="about-link" onclick="scrollToElement('about')" class="landing-nav">ABOUT</a>
+                <a id="portfolio-link" onclick="scrollToElement('portfolio')" class="landing-nav">PORTFOLIO</a>
+                <a id="contact-link" onclick="scrollToElement('contact')" class="landing-nav">CONTACT</a>
+            </div>
+        </div>
+        <div id="about" class="fullScreen">
+            <div class="content">
+                <div class="card">
+                    <div class="card-head">
+                        <h2>ABOUT ME</h2>
+                        <h3>I'm Micah Kinsey, a web developer striving to make my mark on the web with custom, responsive sites built with high attention to detail. To accomplish this I have become skilled
+                            in numerous languages including HTML5, CSS3, JavaScript, Python, and C#, as well as various frameworks including Angular and Bootstrap. What's more, I have experience developing sites using
+                            a variety of Content Management Systems. From building spotless sites on SquareSpace to widgets and plugins on WordPress, I have run the gamut.
+                        </h3>
+                        <br>
+                        <h3>
+                            I hold an Associates of Science in Web Development from Wor-Wic Community College, but even before graduating I started working both as an individual and a teammember on various professional projects.
+                            To view some of my work, check out my portfolio below!
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="portfolio" class="fullScreen">
+            <p>Portfolio</p>
+            <div class="content">
+                <div class="slider">
+                    <div class="slider-title">
+                        <h1>NYPL Web App Migration</h1>
+                    </div>
+                    <div class="slider-content">
+                        <div class="slider-top">
+                            <!-- <div class="slider-arrow-left">
+                                <img src="img/svg/chevron-left.svg" style="height: 50px;" onclick="imgPrev()">
+                            </div> -->
+                            <div id="slider-image-holder" class="slider-image-holder">
+                                <img id="slider-image" class="slider-image" src="img/slider/slider-nypl-01.png">
+                                <img class="slider-arrow-left" src="img/svg/chevron-left.svg" style="height: 50px;" onclick="imgPrev()">
+                                <img class="slider-arrow-right" src="img/svg/chevron-right.svg" style="height: 50px;" onclick="imgNext()">
+                                <div class="slider-circle-holder">
+                                    <img src="img/svg/circle.svg" style="height: 15px;">
+                                    <img src="img/svg/circle-empty.svg" style="height: 15px;">
+                                    <img src="img/svg/circle-empty.svg" style="height: 15px;">
+                                    <img src="img/svg/circle-empty.svg" style="height: 15px;">
+                                    <img src="img/svg/circle-empty.svg" style="height: 15px;">
+                                    <img src="img/svg/circle-empty.svg" style="height: 15px;">
+                                </div>
+                            </div>
+                            <!-- <div class="slider-arrow-right">
+                                <img src="img/svg/chevron-right.svg" style="height: 50px;" onclick="imgNext()">
+                            </div> -->
+                        </div>
+                        <div class="slider-bottom">
+                            <p>text</p>
+                            <br>
+                            <p>text</p>
+                            <p>text</p>
+                            <br>
+                            <p>text</p>
+                            <p>text</p>
+                            <br>
+                            <p>text</p>
+                            <p>text</p>
+                            <br>
+                            <p>text</p>
+                            <p>text</p>
+                            <br>
+                            <p>text</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="contact" class="fullScreen">
+            <p>Contact</p>
+        </div>
+        <footer></footer>
+        <script>
+            function disappear(string) {
+                document.getElementById(string).style.zIndex = -10;
+            }
+            function speedUp(string) {
+                var vid = document.getElementById(string);
+                vid.playbackRate = 1.5;
+            }
+            function scrollToElement(elementId) {
+                var element = document.getElementById(elementId);
+                var top = element.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({top: top, behavior: 'smooth'});
+                //element.scrollIntoView({behavior: "smooth"});
+            }
+
+
+            var links = document.getElementsByClassName('landing-nav');
+            var screens = document.getElementsByClassName('fullscreen');
+            var landing = document.getElementById('landing');
+            var about = document.getElementById('about');
+            var portfolio = document.getElementById('portfolio');
+            var contact = document.getElementById('contact');
+            var landingLink = document.getElementById('landing-link');
+            var aboutLink = document.getElementById('about-link');
+            var portfolioLink = document.getElementById('portfolio-link');
+            var contactLink = document.getElementById('contact-link');
+
+            var sky = document.getElementById('sky');
+            var moon = document.getElementById('moon');
+            var mid = document.getElementById('midground');
+
+            var heights;
+            function resetHeights() {
+                heights = [0];
+                for(var i = 0; i < screens.length; i++) {
+                    heights.push(screens[i].scrollHeight + heights[i]);
+                }
+            }
+            resetHeights();
+
+            window.addEventListener("resize", resetHeights);
+
+
+            function scrollCheck() {
+                var y = window.scrollY;
+                
+                //Parallax stuff
+                sky.style.webkitTransform = 'rotateZ(' + ((y - 500) / 50) +'deg) scale(1.3)';
+                
+                moon.style.top = (y * 0.7);
+                
+                mid.style.top = (y * 0.2);
+                //var fore = document.getElementById('foreground');
+                //fore.style.top = 80 - (y * .5);
+
+                //Link active stuff
+                for(var l = 0; l < links.length; l++) {
+                    if(y >= heights[l] && y < heights[(l + 1)]) {
+                        links[l].classList.add('active');
+                    }
+                    else {
+                        links[l].classList.remove('active');
+                    }
+                }
+            }
+
+            //Slider stuff
+            var sliderImg = document.getElementById('slider-image');
+            sliderImg.src = 'img/slider/slider-nypl-01.png';
+            var sliderImgUrlBase = 'img/slider/';
+            var sliderImgList = ['slider-nypl-01.png', 'slider-dmdeejays-01.png'];
+            var listLength = sliderImgList.length;
+            var sliderIndex = 0;
+
+            function imgFadeIn() {
+                sliderImg.style.opacity = 0;
+                for(var i = 10; i > 0; i--) {
+                    setTimeout(function(){
+                        console.log(sliderImg.style.opacity);
+                        sliderImg.style.opacity = parseFloat(sliderImg.style.opacity) + 0.1;
+                    }, 100);
+                }
+            }
+            function imgFadeOut() {
+                sliderImg.style.opacity = 1;
+                for(var i = 10; i > 0; i--) {
+                    setTimeout(function(){
+                        console.log(sliderImg.style.opacity);
+                        sliderImg.style.opacity -= 0.1;
+                    }, 100);
+                }
+            }
+
+            function imgChangeSrc() {
+                sliderImg.src = sliderImgUrlBase + sliderImgList[sliderIndex];
+            }
+
+            function imgNext() {
+                if(sliderIndex >= listLength - 1) {
+                    sliderIndex = 0;
+                }
+                else {
+                    sliderIndex += 1;
+                }
+                imgFadeOut();
+                setTimeout(imgChangeSrc, 250);
+                setTimeout(imgFadeIn, 250);
+            }
+            
+            function imgPrev() {
+                if(sliderIndex <= 0) {
+                    sliderIndex = listLength - 1;
+                }
+                else {
+                    sliderIndex -= 1;
+                }
+                imgChangeSrc();
+            }
+
+            function imgSelectIndex(index) {
+                sliderIndex = index;
+                imgChangeSrc();
+                //needs more code to change 'active' circles
+            }
+
+            function resizeSliderImg() {
+                var width = sliderImg.width;
+                var height = width / 1.777; //1.777
+                sliderImg.height = height;
+                //console.log('resizing slider image to: ' + width + ' ' + height);
+            }
+            resizeSliderImg();
+            window.addEventListener("resize", resizeSliderImg);
+
+            for(var c = 0; c < listLength; c++) {
+                
+            }
+            
+        </script>
+    </body>
+</html>
