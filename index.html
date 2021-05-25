@@ -54,7 +54,7 @@
             <div class="content">
                 <div class="slider">
                     <div class="slider-title">
-                        <h1>NYPL Web App Migration</h1>
+                        <h1 id="slider-title">NYPL Web App Migration</h1>
                     </div>
                     <div class="slider-content">
                         <div class="slider-top">
@@ -65,13 +65,8 @@
                                 <img id="slider-image" class="slider-image" src="img/slider/slider-nypl-01.png">
                                 <img class="slider-arrow-left" src="img/svg/chevron-left.svg" style="height: 50px;" onclick="imgPrev()">
                                 <img class="slider-arrow-right" src="img/svg/chevron-right.svg" style="height: 50px;" onclick="imgNext()">
-                                <div class="slider-circle-holder">
-                                    <img src="img/svg/circle.svg" style="height: 15px;">
-                                    <img src="img/svg/circle-empty.svg" style="height: 15px;">
-                                    <img src="img/svg/circle-empty.svg" style="height: 15px;">
-                                    <img src="img/svg/circle-empty.svg" style="height: 15px;">
-                                    <img src="img/svg/circle-empty.svg" style="height: 15px;">
-                                    <img src="img/svg/circle-empty.svg" style="height: 15px;">
+                                <div id="slider-circle-holder" class="slider-circle-holder">
+
                                 </div>
                             </div>
                             <!-- <div class="slider-arrow-right">
@@ -79,21 +74,9 @@
                             </div> -->
                         </div>
                         <div class="slider-bottom">
-                            <p>text</p>
-                            <br>
-                            <p>text</p>
-                            <p>text</p>
-                            <br>
-                            <p>text</p>
-                            <p>text</p>
-                            <br>
-                            <p>text</p>
-                            <p>text</p>
-                            <br>
-                            <p>text</p>
-                            <p>text</p>
-                            <br>
-                            <p>text</p>
+                            <div id="slider-description" class="slider-description">
+
+                            </div>
                         </div>
 
                     </div>
@@ -170,19 +153,37 @@
                 }
             }
 
+
+            //
+            //
             //Slider stuff
+            //
+            //
             var sliderImg = document.getElementById('slider-image');
+            var sliderTitle = document.getElementById('slider-title');
+            var sliderDescription = document.getElementById('slider-description');
+            var sliderCircleHolder = document.getElementById('slider-circle-holder');
             sliderImg.src = 'img/slider/slider-nypl-01.png';
             var sliderImgUrlBase = 'img/slider/';
-            var sliderImgList = ['slider-nypl-01.png', 'slider-dmdeejays-01.png'];
-            var listLength = sliderImgList.length;
+            var sliderList = [
+                {url:'slider-nypl-01.png', title:'NYPL Web App Migration', description:'Desc. 1'},
+                {url:'slider-dmdeejays-01.png', title:'Dance Masters Entertainment', description:'<h1>Description</h1><p>this is a description</p>'},
+            ];
+            var listLength = sliderList.length;
             var sliderIndex = 0;
+
+            function sliderSetup() {
+                //add the appropriate number of slider dots
+                for(var s = 0; s < sliderList.length; s++) {
+                    sliderCircleHolder.innerHTML += '<img name="slider-dot" src="img/svg/circle-empty.svg" style="height: 15px;" onclick="imgClickDot(' + s + ')">';
+                }
+                sliderDotActive();
+            }
 
             function imgFadeIn() {
                 sliderImg.style.opacity = 0;
                 for(var i = 10; i > 0; i--) {
                     setTimeout(function(){
-                        console.log(sliderImg.style.opacity);
                         sliderImg.style.opacity = parseFloat(sliderImg.style.opacity) + 0.1;
                     }, 100);
                 }
@@ -191,14 +192,23 @@
                 sliderImg.style.opacity = 1;
                 for(var i = 10; i > 0; i--) {
                     setTimeout(function(){
-                        console.log(sliderImg.style.opacity);
                         sliderImg.style.opacity -= 0.1;
                     }, 100);
                 }
             }
 
+            function imgClickDot(number) {
+                sliderIndex = number;
+                imgFadeOut();
+                setTimeout(imgChangeSrc, 250);
+                setTimeout(imgFadeIn, 250);
+            }
+
             function imgChangeSrc() {
-                sliderImg.src = sliderImgUrlBase + sliderImgList[sliderIndex];
+                sliderImg.src = sliderImgUrlBase + sliderList[sliderIndex].url;
+                sliderTitle.innerHTML = sliderList[sliderIndex].title;
+                sliderDescription.innerHTML = sliderList[sliderIndex].description;
+                sliderDotActive();
             }
 
             function imgNext() {
@@ -220,7 +230,9 @@
                 else {
                     sliderIndex -= 1;
                 }
-                imgChangeSrc();
+                imgFadeOut();
+                setTimeout(imgChangeSrc, 250);
+                setTimeout(imgFadeIn, 250);
             }
 
             function imgSelectIndex(index) {
@@ -229,12 +241,25 @@
                 //needs more code to change 'active' circles
             }
 
+            function sliderDotActive() {
+                var dots = document.getElementsByName('slider-dot');
+                for(var d = 0; d < dots.length; d++) {
+                    if(d == sliderIndex) {
+                        dots[d].src = 'img/svg/circle.svg';
+                    }
+                    else {
+                        dots[d].src = 'img/svg/circle-empty.svg';
+                    }
+                }
+            }
+
             function resizeSliderImg() {
                 var width = sliderImg.width;
                 var height = width / 1.777; //1.777
                 sliderImg.height = height;
                 //console.log('resizing slider image to: ' + width + ' ' + height);
             }
+            sliderSetup();
             resizeSliderImg();
             window.addEventListener("resize", resizeSliderImg);
 
